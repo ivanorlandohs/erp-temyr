@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Tablero de averías e intervenciones</h2>
+    <p>Vista general tipo Planner según el estado de cada intervención.</p>
+
+    <form method="get" style="margin-top: 20px;">
+        <label for="cliente"><strong>Filtrar por cliente:</strong></label>
+        <select name="cliente" id="cliente" style="padding: 8px; margin-left: 10px;">
+            <option value="">Todos</option>
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id }}" {% if cliente_id == cliente.id|stringformat:"s" %}selected{% endif %}>
+                    {{ cliente.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn">Filtrar</button>
+    </form>
+</div>
+
+<style>
+    .kanban-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        align-items: start;
+    }
+
+    .kanban-column {
+        background: #eef3f7;
+        border-radius: 8px;
+        padding: 15px;
+    }
+
+    .kanban-column h3 {
+        margin-top: 0;
+        color: #2f6f8f;
+    }
+
+    .kanban-card {
+        display: block;
+        background: white;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .kanban-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+
+    .kanban-card p {
+        margin: 6px 0;
+        font-size: 14px;
+    }
+
+    .contador {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 12px;
+    }
+</style>
+
+<div class="kanban-container">
+    <div class="kanban-column">
+        <h3>Avería</h3>
+        <p class="contador">{{ averias|length }} intervención(es)</p>
+        {% for item in averias %}
+            <a class="kanban-card" href="{% url 'historial_puerta' item.puerta.id %}">
+                <strong>{{ item.titulo }}</strong>
+                <p><strong>Cliente:</strong> {{ item.puerta.cliente.nombre }}</p>
+                <p><strong>Puerta:</strong> {{ item.puerta.ubicacion }}</p>
+                <p><strong>Serie:</strong> {{ item.puerta.numero_serie }}</p>
+                <p><strong>Técnico:</strong> {{ item.tecnico_asignado }}</p>
+            </a>
+        {% empty %}
+            <p>No hay intervenciones.</p>
+        {% endfor %}
+    </div>
+
+    <div class="kanban-column">
+        <h3>En proceso</h3>
+        <p class="contador">{{ en_proceso|length }} intervención(es)</p>
+        {% for item in en_proceso %}
+            <a class="kanban-card" href="{% url 'historial_puerta' item.puerta.id %}">
+                <strong>{{ item.titulo }}</strong>
+                <p><strong>Cliente:</strong> {{ item.puerta.cliente.nombre }}</p>
+                <p><strong>Puerta:</strong> {{ item.puerta.ubicacion }}</p>
+                <p><strong>Serie:</strong> {{ item.puerta.numero_serie }}</p>
+                <p><strong>Técnico:</strong> {{ item.tecnico_asignado }}</p>
+            </a>
+        {% empty %}
+            <p>No hay intervenciones.</p>
+        {% endfor %}
+    </div>
+
+    <div class="kanban-column">
+        <h3>Finalizada</h3>
+        <p class="contador">{{ finalizadas|length }} intervención(es)</p>
+        {% for item in finalizadas %}
+            <a class="kanban-card" href="{% url 'historial_puerta' item.puerta.id %}">
+                <strong>{{ item.titulo }}</strong>
+                <p><strong>Cliente:</strong> {{ item.puerta.cliente.nombre }}</p>
+                <p><strong>Puerta:</strong> {{ item.puerta.ubicacion }}</p>
+                <p><strong>Serie:</strong> {{ item.puerta.numero_serie }}</p>
+                <p><strong>Técnico:</strong> {{ item.tecnico_asignado }}</p>
+            </a>
+        {% empty %}
+            <p>No hay intervenciones.</p>
+        {% endfor %}
+    </div>
+
+    <div class="kanban-column">
+        <h3>Parte entregado</h3>
+        <p class="contador">{{ partes_entregados|length }} intervención(es)</p>
+        {% for item in partes_entregados %}
+            <a class="kanban-card" href="{% url 'historial_puerta' item.puerta.id %}">
+                <strong>{{ item.titulo }}</strong>
+                <p><strong>Cliente:</strong> {{ item.puerta.cliente.nombre }}</p>
+                <p><strong>Puerta:</strong> {{ item.puerta.ubicacion }}</p>
+                <p><strong>Serie:</strong> {{ item.puerta.numero_serie }}</p>
+                <p><strong>Técnico:</strong> {{ item.tecnico_asignado }}</p>
+            </a>
+        {% empty %}
+            <p>No hay intervenciones.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

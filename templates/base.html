@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TEMYR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+        }
+        header {
+            background: #2f6f8f;
+            color: white;
+            padding: 15px 30px;
+        }
+        nav {
+            background: #1f4f66;
+            padding: 10px 30px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        main {
+            padding: 30px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #e9f0f4;
+        }
+        .btn {
+            display: inline-block;
+            background: #2f6f8f;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TEMYR</h1>
+        <p>Plataforma de gestión de intervenciones y registro horario</p>
+    </header>
+
+    {% if user.is_authenticated %}
+    <nav>
+        <a href="{% url 'dashboard' %}">Inicio</a>
+        <a href="{% url 'lista_clientes' %}">Clientes</a>
+        <a href="{% url 'lista_intervenciones' %}">Intervenciones</a>
+        <a href="{% url 'tablero_intervenciones' %}">Tablero</a>
+        <a href="{% url 'lista_jornada' %}">Jornada</a>
+        <a href="/admin/">Administración</a>
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </nav>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Listado de intervenciones</h2>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Cliente</th>
+            <th>Puerta</th>
+            <th>Nº serie</th>
+            <th>Técnico asignado</th>
+            <th>Estado</th>
+            <th>Fecha creación</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for intervencion in intervenciones %}
+        <tr>
+            <td>{{ intervencion.titulo }}</td>
+            <td>{% if intervencion.puerta %}{{ intervencion.puerta.cliente.nombre }}{% else %}Sin cliente{% endif %}</td>
+            <td>{% if intervencion.puerta %}{{ intervencion.puerta.ubicacion }}{% else %}Sin puerta{% endif %}</td>
+            <td>{% if intervencion.puerta %}{{ intervencion.puerta.numero_serie }}{% else %}-{% endif %}</td>
+            <td>{{ intervencion.tecnico_asignado }}</td>
+            <td>{{ intervencion.get_estado_display }}</td>
+            <td>{{ intervencion.fecha_creacion }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No hay intervenciones registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 700px; margin: 0 auto;">
+    <h2>Inicio obligatorio de jornada</h2>
+    <p>Antes de acceder a la aplicación debes registrar tu inicio de jornada de hoy.</p>
+    <p><strong>Fecha:</strong> {{ hoy }}</p>
+
+    <form method="post" style="margin-top: 20px;">
+        {% csrf_token %}
+        <button type="submit" class="btn">Registrar inicio de jornada</button>
+    </form>
+</div>
+{% endblock %}

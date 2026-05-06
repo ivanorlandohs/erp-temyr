@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ cliente.nombre }}</h2>
+    <p><strong>Municipio:</strong> {{ cliente.municipio }}</p>
+    <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+    <p><strong>Dirección:</strong> {{ cliente.direccion }}</p>
+</div>
+
+<div class="card">
+    <h3>Puertas del cliente</h3>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nº serie</th>
+            <th>Ubicación</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Histórico</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for puerta in puertas %}
+        <tr>
+            <td>{{ puerta.numero_serie }}</td>
+            <td>{{ puerta.ubicacion }}</td>
+            <td>{{ puerta.marca }}</td>
+            <td>{{ puerta.modelo }}</td>
+            <td><a class="btn" href="{% url 'historial_puerta' puerta.id %}">Ver histórico</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">Este cliente no tiene puertas registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

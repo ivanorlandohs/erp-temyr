@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Bienvenido a TEMYR</h2>
+    <p>Has iniciado sesión correctamente en la plataforma.</p>
+    <p>Desde este panel puedes acceder a las intervenciones, registros de jornada y administración.</p>
+</div>
+
+<div class="card">
+    <h3>Accesos rápidos</h3>
+    <p><a class="btn" href="{% url 'lista_clientes' %}">Ver clientes</a></p>
+    <p><a class="btn" href="{% url 'lista_intervenciones' %}">Ver intervenciones</a></p>
+    <p><a class="btn" href="{% url 'tablero_intervenciones' %}">Ver tablero</a></p>
+    <p><a class="btn" href="{% url 'lista_jornada' %}">Ver registros de jornada</a></p>
+    <p><a class="btn" href="{% url 'finalizar_jornada' %}">Finalizar jornada</a></p>
+</div>
+{% endblock %}

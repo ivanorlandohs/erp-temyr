@@ -1,0 +1,30 @@
+﻿# Entorno virtual
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Variables privadas
+.env
+.env.local
+.env.production
+.env.development
+
+# Archivos temporales
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Backups
+*.zip

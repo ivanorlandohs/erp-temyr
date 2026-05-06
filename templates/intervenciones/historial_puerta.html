@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Histórico de puerta</h2>
+    <p><strong>Cliente:</strong> {{ puerta.cliente.nombre }}</p>
+    <p><strong>Ubicación:</strong> {{ puerta.ubicacion }}</p>
+    <p><strong>Número de serie:</strong> {{ puerta.numero_serie }}</p>
+    <p><strong>Marca:</strong> {{ puerta.marca }}</p>
+    <p><strong>Modelo:</strong> {{ puerta.modelo }}</p>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Título</th>
+            <th>Técnico</th>
+            <th>Estado</th>
+            <th>Trabajo realizado</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in historial %}
+        <tr>
+            <td>{{ item.fecha_creacion }}</td>
+            <td>{{ item.titulo }}</td>
+            <td>{{ item.tecnico_asignado }}</td>
+            <td>{{ item.get_estado_display }}</td>
+            <td>{{ item.trabajo_realizado }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No hay intervenciones registradas para esta puerta.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
